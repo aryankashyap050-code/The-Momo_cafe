@@ -1,0 +1,1114 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Reports | THE MOMO Café</title>
+
+
+<link rel="stylesheet" href="admin.css">
+
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+
+<script src="https://kit.fontawesome.com/6d2ea823d0.js" crossorigin="anonymous"></script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</head>
+
+
+<body>
+
+
+<div class="dashboard">
+
+
+<!-- SIDEBAR -->
+
+<aside class="sidebar">
+
+
+<h2>🍜 THE MOMO Café</h2>
+
+
+<ul>
+
+
+<a href="dashboard.html">
+
+<li>
+
+<i class="fas fa-chart-line"></i>
+
+Dashboard
+
+</li>
+
+</a>
+
+
+<a href="inventory.html">
+
+<li>
+
+<i class="fas fa-box"></i>
+
+Inventory
+
+</li>
+
+</a>
+
+
+<a href="orders.html">
+
+<li>
+
+<i class="fas fa-utensils"></i>
+
+Orders
+
+</li>
+
+</a>
+
+
+<a href="menu.html">
+
+<li>
+
+<i class="fas fa-book-open"></i>
+
+Menu
+
+</li>
+
+</a>
+
+
+<a href="reports.html">
+
+<li class="active">
+
+<i class="fas fa-chart-bar"></i>
+
+Reports
+
+</li>
+
+</a>
+
+
+<a href="../index.html">
+
+<li>
+
+<i class="fas fa-globe"></i>
+
+Website
+
+</li>
+
+</a>
+
+
+<a href="login.html">
+
+<li>
+
+<i class="fas fa-right-from-bracket"></i>
+
+Logout
+
+</li>
+
+</a>
+
+
+</ul>
+
+</aside>
+
+
+
+<!-- MAIN CONTENT -->
+
+<main class="content">
+
+
+<header>
+
+<h1>Sales Reports</h1>
+
+</header>
+
+
+
+<!-- REPORT CARDS -->
+
+<section class="cards">
+
+
+<div class="card">
+
+<h3>Today's Revenue</h3>
+
+<h2 id="todayRevenue">
+₹0
+</h2>
+
+</div>
+
+
+<div class="card">
+
+<h3>This Week</h3>
+
+<h2 id="weekRevenue">
+₹0
+</h2>
+
+</div>
+
+
+<div class="card">
+
+<h3>This Month</h3>
+
+<h2 id="monthRevenue">
+₹0
+</h2>
+
+</div>
+
+
+<div class="card">
+
+<h3>Total Orders</h3>
+
+<h2 id="totalOrders">
+0
+</h2>
+
+</div>
+
+
+</section>
+
+
+
+<!-- MONTHLY SALES -->
+
+<section class="table-section">
+
+
+<h2>Monthly Sales</h2>
+
+
+<canvas id="salesChart"></canvas>
+
+
+</section>
+
+
+
+<!-- BEST SELLING ITEMS -->
+
+<section class="table-section">
+
+
+<h2>Best Selling Items</h2>
+
+
+<table>
+
+
+<thead>
+
+<tr>
+
+<th>Item</th>
+
+<th>Orders</th>
+
+<th>Revenue</th>
+
+</tr>
+
+</thead>
+
+
+<tbody id="bestSellingTable">
+
+</tbody>
+
+
+</table>
+
+
+</section>
+
+
+</main>
+
+</div>
+
+
+
+<!-- SUPABASE -->
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+
+<script>
+
+
+/* =====================================
+   SUPABASE CONNECTION
+===================================== */
+
+
+const SUPABASE_URL =
+"https://rwervygorcsmztbwfeqq.supabase.co";
+
+
+const SUPABASE_KEY =
+"sb_publishable_cRA3wSzbzBnH6bSOuu1xLw_rr0Bal6h";
+
+
+const supabaseClient =
+window.supabase.createClient(
+
+    SUPABASE_URL,
+
+    SUPABASE_KEY
+
+);
+
+
+
+/* =====================================
+   ELEMENTS
+===================================== */
+
+
+const todayRevenueElement =
+document.getElementById("todayRevenue");
+
+
+const weekRevenueElement =
+document.getElementById("weekRevenue");
+
+
+const monthRevenueElement =
+document.getElementById("monthRevenue");
+
+
+const totalOrdersElement =
+document.getElementById("totalOrders");
+
+
+const bestSellingTable =
+document.getElementById("bestSellingTable");
+
+
+
+/* =====================================
+   CHART
+===================================== */
+
+
+let salesChart;
+
+
+
+/* =====================================
+   GET ITEM INFORMATION
+===================================== */
+
+
+function getItems(items) {
+
+
+    if (!items) {
+
+        return [];
+
+    }
+
+
+
+    /* If stored as JSON string */
+
+    if (typeof items === "string") {
+
+        try {
+
+            items = JSON.parse(items);
+
+        }
+
+        catch(error) {
+
+            return [
+                {
+                    name: items,
+                    quantity: 1
+                }
+            ];
+
+        }
+
+    }
+
+
+
+    /* Array */
+
+    if (Array.isArray(items)) {
+
+        return items.map(item => {
+
+
+            if (typeof item === "string") {
+
+                return {
+
+                    name: item,
+
+                    quantity: 1
+
+                };
+
+            }
+
+
+
+            if (
+                typeof item === "object" &&
+                item !== null
+            ) {
+
+                return {
+
+                    name:
+                        item.name ||
+                        item.item_name ||
+                        item.item ||
+                        item.title ||
+                        item.product_name ||
+                        "Unknown Item",
+
+                    quantity:
+                        Number(
+                            item.quantity ||
+                            item.qty ||
+                            1
+                        )
+
+                };
+
+            }
+
+
+            return {
+
+                name: String(item),
+
+                quantity: 1
+
+            };
+
+        });
+
+    }
+
+
+
+    /* Single object */
+
+    if (
+        typeof items === "object" &&
+        items !== null
+    ) {
+
+
+        const name =
+
+            items.name ||
+
+            items.item_name ||
+
+            items.item ||
+
+            items.title ||
+
+            items.product_name;
+
+
+
+        if (name) {
+
+            return [
+
+                {
+
+                    name: name,
+
+                    quantity:
+                        Number(
+                            items.quantity ||
+                            items.qty ||
+                            1
+                        )
+
+                }
+
+            ];
+
+        }
+
+
+
+        /* Example:
+           {"Chicken Momos":2}
+        */
+
+
+        return Object.entries(items)
+            .map(([name, quantity]) => ({
+
+                name: name,
+
+                quantity:
+                    Number(quantity) || 1
+
+            }));
+
+    }
+
+
+    return [];
+
+}
+
+
+
+/* =====================================
+   GET ORDER DATE
+===================================== */
+
+
+function getOrderDate(order) {
+
+    return new Date(
+        order.created_at
+    );
+
+}
+
+
+
+/* =====================================
+   LOAD REPORTS
+===================================== */
+
+
+async function loadReports() {
+
+
+    const { data, error } =
+
+        await supabaseClient
+
+        .from("Orders")
+
+        .select("*")
+
+        .order("created_at", {
+
+            ascending: true
+
+        });
+
+
+
+    console.log(
+        "REPORT ORDERS:",
+        data
+    );
+
+
+    console.log(
+        "REPORT ERROR:",
+        error
+    );
+
+
+
+    if (error) {
+
+        console.error(error);
+
+        return;
+
+    }
+
+
+
+    const orders =
+        data || [];
+
+
+
+    /* =================================
+       TOTAL ORDERS
+    ================================= */
+
+
+    totalOrdersElement.innerHTML =
+        orders.length;
+
+
+
+    /* =================================
+       DATE INFORMATION
+    ================================= */
+
+
+    const now =
+        new Date();
+
+
+
+    const todayStart =
+        new Date(now);
+
+
+    todayStart.setHours(
+        0, 0, 0, 0
+    );
+
+
+
+    /* Start of week */
+
+    const weekStart =
+        new Date(now);
+
+
+    const day =
+        weekStart.getDay();
+
+
+    const difference =
+        day === 0
+        ? 6
+        : day - 1;
+
+
+    weekStart.setDate(
+        weekStart.getDate() - difference
+    );
+
+
+    weekStart.setHours(
+        0, 0, 0, 0
+    );
+
+
+
+    /* Start of month */
+
+    const monthStart =
+        new Date(
+
+            now.getFullYear(),
+
+            now.getMonth(),
+
+            1
+
+        );
+
+
+
+    /* =================================
+       REVENUE
+    ================================= */
+
+
+    let todayRevenue = 0;
+
+    let weekRevenue = 0;
+
+    let monthRevenue = 0;
+
+
+
+    orders.forEach(order => {
+
+
+        const orderDate =
+            getOrderDate(order);
+
+
+        const amount =
+            Number(
+                order.total_amount
+            ) || 0;
+
+
+
+        if (orderDate >= todayStart) {
+
+            todayRevenue +=
+                amount;
+
+        }
+
+
+
+        if (orderDate >= weekStart) {
+
+            weekRevenue +=
+                amount;
+
+        }
+
+
+
+        if (orderDate >= monthStart) {
+
+            monthRevenue +=
+                amount;
+
+        }
+
+    });
+
+
+
+    todayRevenueElement.innerHTML =
+        "₹" +
+        todayRevenue.toFixed(2);
+
+
+
+    weekRevenueElement.innerHTML =
+        "₹" +
+        weekRevenue.toFixed(2);
+
+
+
+    monthRevenueElement.innerHTML =
+        "₹" +
+        monthRevenue.toFixed(2);
+
+
+
+    /* =================================
+       MONTHLY SALES
+    ================================= */
+
+
+    const monthlySales = {
+
+        Jan: 0,
+
+        Feb: 0,
+
+        Mar: 0,
+
+        Apr: 0,
+
+        May: 0,
+
+        Jun: 0,
+
+        Jul: 0,
+
+        Aug: 0,
+
+        Sep: 0,
+
+        Oct: 0,
+
+        Nov: 0,
+
+        Dec: 0
+
+    };
+
+
+
+    orders.forEach(order => {
+
+
+        const date =
+            getOrderDate(order);
+
+
+        const amount =
+            Number(
+                order.total_amount
+            ) || 0;
+
+
+
+        const month =
+            date.toLocaleString(
+                "en-US",
+                {
+                    month: "short"
+                }
+            );
+
+
+        if (
+            monthlySales
+            .hasOwnProperty(month)
+        ) {
+
+            monthlySales[month] +=
+                amount;
+
+        }
+
+    });
+
+
+
+    updateChart(monthlySales);
+
+
+
+    /* =================================
+       BEST SELLING ITEMS
+    ================================= */
+
+
+    const itemStats = {};
+
+
+
+    orders.forEach(order => {
+
+
+        const items =
+            getItems(order.Items);
+
+
+        const orderTotal =
+            Number(
+                order.total_amount
+            ) || 0;
+
+
+
+        items.forEach(item => {
+
+
+            const name =
+                item.name;
+
+
+            const quantity =
+                Number(
+                    item.quantity
+                ) || 1;
+
+
+
+            if (!itemStats[name]) {
+
+                itemStats[name] = {
+
+                    orders: 0,
+
+                    quantity: 0,
+
+                    revenue: 0
+
+                };
+
+            }
+
+
+
+            itemStats[name].orders += 1;
+
+            itemStats[name].quantity +=
+                quantity;
+
+
+
+            /*
+             If individual item prices
+             are not stored, distribute
+             order revenue equally.
+            */
+
+            itemStats[name].revenue +=
+                orderTotal /
+                Math.max(items.length, 1);
+
+        });
+
+    });
+
+
+
+    const sortedItems =
+
+        Object.entries(itemStats)
+
+        .sort(
+            (a, b) =>
+                b[1].quantity -
+                a[1].quantity
+        )
+
+        .slice(0, 10);
+
+
+
+    bestSellingTable.innerHTML =
+        "";
+
+
+
+    if (sortedItems.length === 0) {
+
+
+        bestSellingTable.innerHTML = `
+
+        <tr>
+
+            <td colspan="3">
+
+                No sales data available.
+
+            </td>
+
+        </tr>
+
+        `;
+
+
+        return;
+
+    }
+
+
+
+    sortedItems.forEach(
+        ([name, stats]) => {
+
+
+        bestSellingTable.innerHTML += `
+
+        <tr>
+
+            <td>
+                ${name}
+            </td>
+
+            <td>
+                ${stats.quantity}
+            </td>
+
+            <td>
+                ₹${stats.revenue.toFixed(2)}
+            </td>
+
+        </tr>
+
+        `;
+
+    });
+
+}
+
+
+
+/* =====================================
+   UPDATE CHART
+===================================== */
+
+
+function updateChart(monthlySales) {
+
+
+    const ctx =
+        document.getElementById(
+            "salesChart"
+        );
+
+
+
+    const labels = [
+
+        "Jan",
+        "Feb",
+        "Mar",
+        "Apr",
+        "May",
+        "Jun",
+        "Jul",
+        "Aug",
+        "Sep",
+        "Oct",
+        "Nov",
+        "Dec"
+
+    ];
+
+
+
+    const values = labels.map(
+        month =>
+            monthlySales[month]
+    );
+
+
+
+    if (salesChart) {
+
+        salesChart.destroy();
+
+    }
+
+
+
+    salesChart = new Chart(
+
+        ctx,
+
+        {
+
+            type: "bar",
+
+
+            data: {
+
+                labels: labels,
+
+
+                datasets: [
+
+                    {
+
+                        label: "Sales",
+
+                        data: values,
+
+                        backgroundColor:
+                            "#FFD600",
+
+                        borderColor:
+                            "#111",
+
+                        borderWidth: 1
+
+                    }
+
+                ]
+
+            },
+
+
+            options: {
+
+                responsive: true,
+
+
+                plugins: {
+
+                    legend: {
+
+                        display: false
+
+                    }
+
+                }
+
+            }
+
+        }
+
+    );
+
+}
+
+
+
+/* =====================================
+   INITIAL LOAD
+===================================== */
+
+
+loadReports();
+
+
+
+/* =====================================
+   REALTIME UPDATES
+===================================== */
+
+
+supabaseClient
+
+.channel("reports-orders")
+
+.on(
+
+    "postgres_changes",
+
+    {
+
+        event: "*",
+
+        schema: "public",
+
+        table: "Orders"
+
+    },
+
+    (payload) => {
+
+
+        console.log(
+            "REPORT ORDER UPDATE:",
+            payload
+        );
+
+
+        loadReports();
+
+    }
+
+)
+
+.subscribe();
+
+
+</script>
+
+
+</body>
+
+</html>

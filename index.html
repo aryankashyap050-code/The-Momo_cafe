@@ -3,513 +3,986 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Momo Cafe</title>
+<title>The Momo Cafe</title>
+<!-- Google Font -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-   <link rel="stylesheet" href="style.css">
+<link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet"
+>
+<!-- Main CSS -->
+<link rel="stylesheet" href="style.css">
 </head>
-
 <body>
-
-    <nav>
-        <div class="logo">
-    <img src="images/logo.png" alt="The Momo Café Logo">
+<!-- =========================================================
+     NAVIGATION
+========================================================= -->
+<nav>
+    <div class="logo">
+        <img src="images/logo.png" alt="The Momo Café Logo">
     </div>
-
-        <ul>
-            <li><a href="#home">Home</a></li>
-            <li><a href="#menu">Menu</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#gallery">Gallery</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
-    </nav>
-
-<section id="home" class="hero">
-
-    <div class="hero-text">
-
-        <h1>Freshly Made,<br>Served with Love</h1>
-
-        <p>
-            Experience delicious veg & non-veg momos,
-            freshly prepared every day in Jalna.
-        </p>
-
-        <a href="#menu" class="hero-btn">View Menu</a>
-
-    </div>
-
-    <div class="hero-image">
-
-    <img src="images/paint.png" class="paint" alt="">
-
-    <img src="images/hero.png" class="momos" alt="Steamed Momos">
-
-</div>
-
-</section>
-
-<section class="features reveal">
-
-    <div class="feature">
-        <div class="icon">🥟</div>
-        <h3>Fresh Every Day</h3>
-        <p>Freshly handmade momos prepared daily using quality ingredients.</p>
-    </div>
-
-    <div class="feature">
-        <div class="icon">⭐</div>
-        <h3>Premium Taste</h3>
-        <p>Authentic recipes with rich flavours that keep customers coming back.</p>
-    </div>
-
-    <div class="feature">
-        <div class="icon">🚚</div>
-        <h3>Quick Service</h3>
-        <p>Fast dine-in and takeaway service so you enjoy your food without waiting.</p>
-    </div>
-
-</section>
-
-<section id="about" class="about reveal">
-
-    <div class="about-image">
-        <img src="images/about.png" alt="The MOMO Café">
-    </div>
-
-    <div class="about-text">
-
-        <h2>About The MOMO Café</h2>
-
-        <p>
-            At <strong>The MOMO Café</strong>, we believe great food begins with
-            fresh ingredients and authentic flavours. Every momo is handcrafted
-            daily and served hot with our signature chutneys.
-        </p>
-
-        <p>
-            Whether you're dining with friends, grabbing a quick takeaway, or
-            enjoying our refreshing beverages, we strive to make every visit
-            memorable.
-        </p>
-
-        <button>Visit Us</button>
-
-    </div>
-
-</section>
-
-<section id="gallery" class="gallery reveal">
-
-    <h2>Gallery</h2>
-
-    <p>Take a glimpse of our delicious food and café ambience.</p>
-
-    <div class="gallery-grid">
-
-        <img src="images/gallery1.png" alt="Steamed Momos">
-
-        <img src="images/gallery2.png" alt="Fried Momos">
-
-        <img src="images/gallery3.png" alt="Tandoori Momos">
-
-        <img src="images/gallery4.png" alt="Gravy Momos">
-
-        <img src="images/gallery5.png" alt="Jhol Momos">
-
-        <img src="images/gallery6.png" alt="Cafe Interior">
-
-    </div>
-
-</section>
-
-<section class="testimonials reveal">
-
-    <h2>What Our Customers Say</h2>
-
-    <p>Loved by food lovers across Jalna.</p>
-
-    <div class="testimonial-grid">
-
-        <div class="testimonial-card">
-            <div class="stars">⭐⭐⭐⭐⭐</div>
-            <p>"The steamed momos are incredibly fresh. Definitely my favourite place in Jalna!"</p>
-            <h4>— Rahul S.</h4>
-        </div>
-
-        <div class="testimonial-card">
-            <div class="stars">⭐⭐⭐⭐⭐</div>
-            <p>"Amazing tandoori momos and quick service. Highly recommended."</p>
-            <h4>— Priya M.</h4>
-        </div>
-
-        <div class="testimonial-card">
-            <div class="stars">⭐⭐⭐⭐⭐</div>
-            <p>"Great taste, affordable prices and a clean café. Will visit again!"</p>
-            <h4>— Aman K.</h4>
-        </div>
-
-    </div>
-
-</section>
-
-<section class="best-sellers reveal">
-
-    <h2>Our Best Sellers</h2>
-
-    <div class="cards">
-
-        <!-- Card 1 -->
-        <div class="card">
-
-            <img src="images/steamed.png" alt="Steamed Momos">
-
-            <div class="card-content">
-
-                <span class="tag">Veg & Non-Veg</span>
-
-                <h3>Steamed Momos</h3>
-
-                <p>Soft, juicy and freshly handcrafted every day.</p>
-
-                <div class="price-row">
-
-                    <span class="price">₹99 Onwards</span>
-
-                    <button class="order-btn">Order Now</button>
-
-                </div>
-
-            </div>
-
-        </div>
-
-        <!-- Card 2 -->
-        <div class="card">
-
-            <img src="images/fried.png" alt="Fried Momos">
-
-            <div class="card-content">
-
-                <span class="tag">Veg & Non-Veg</span>
-
-                <h3>Fried Momos</h3>
-
-                <p>Golden crispy outside with a flavourful filling.</p>
-
-                <div class="price-row">
-
-                    <span class="price">₹119 Onwards</span>
-
-                    <button class="order-btn">Order Now</button>
-
-                </div>
-
-            </div>
-
-        </div>
-
-        <!-- Card 3 -->
-        <div class="card">
-
-            <img src="images/tandoori.png" alt="Tandoori Momos">
-
-            <div class="card-content">
-
-                <span class="tag">Veg & Non-Veg</span>
-
-                <h3>Tandoori Momos</h3>
-
-                <p>Smoky, spicy and perfectly grilled.</p>
-
-                <div class="price-row">
-
-                    <span class="price">₹149 Onwards</span>
-
-                    <button class="order-btn">Order Now</button>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-</section>
-
-<section class="menu-categories reveal">
-
-    <h2>Explore Our Menu</h2>
-
-    <p>Discover our delicious range of freshly prepared dishes.</p>
-
-    <div class="category-grid">
-
-        <div class="category-card">
-            <span>🥟</span>
-            <h3>Steamed Momos</h3>
-        </div>
-
-        <div class="category-card">
-            <span>🔥</span>
-            <h3>Fried Momos</h3>
-        </div>
-
-        <div class="category-card">
-            <span>🌶️</span>
-            <h3>Tandoori Momos</h3>
-        </div>
-
-        <div class="category-card">
-            <span>🍛</span>
-            <h3>Gravy Momos</h3>
-        </div>
-
-        <div class="category-card">
-            <span>🍲</span>
-            <h3>Jhol Momos</h3>
-        </div>
-
-        <div class="category-card">
-            <span>🍜</span>
-            <h3>Chinese</h3>
-        </div>
-
-        <div class="category-card">
-            <span>🥤</span>
-            <h3>Beverages</h3>
-        </div>
-
-        <div class="category-card">
-            <span>🎁</span>
-            <h3>Combos</h3>
-        </div>
-
-    </div>
-
-</section>
-
-<section id="menu" class="menu-header reveal">
-
-    <h2>Our Complete Menu</h2>
-
-    <p>
-        From steamed favourites to spicy tandoori delights,
-        discover every flavour crafted fresh at The Momo Café.
-    </p>
-
-</section>
-
-<section class="full-menu reveal">
-
-    <div class="menu-box">
-
-        <h2>🥟 Steamed Momos</h2>
-
-        <div class="menu-item"><span>Veg</span><span>₹79</span></div>
-        <div class="menu-item"><span>Paneer</span><span>₹89</span></div>
-        <div class="menu-item"><span>Chicken</span><span>₹99</span></div>
-
-    </div>
-
-    <div class="menu-box">
-
-        <h2>🔥 Fried Momos</h2>
-
-        <div class="menu-item"><span>Veg</span><span>₹89</span></div>
-        <div class="menu-item"><span>Paneer</span><span>₹99</span></div>
-        <div class="menu-item"><span>Chicken</span><span>₹119</span></div>
-
-    </div>
-
-    <div class="menu-box">
-
-        <h2>🌶️ Tandoori Momos</h2>
-
-        <div class="menu-item"><span>Veg</span><span>₹79</span></div>
-        <div class="menu-item"><span>Chicken</span><span>₹119</span></div>
-
-    </div>
-
-    <div class="menu-box">
-
-        <h2>🍛 Gravy Momos</h2>
-
-        <div class="menu-item"><span>Veg</span><span>₹89</span></div>
-        <div class="menu-item"><span>Chicken</span><span>₹119</span></div>
-
-    </div>
-
-    <div class="menu-box">
-
-        <h2>🍲 Jhol Momos</h2>
-
-        <div class="menu-item"><span>Veg</span><span>₹89</span></div>
-        <div class="menu-item"><span>Chicken</span><span>₹129</span></div>
-
-    </div>
-
-    <div class="menu-box">
-
-        <h2>🍜 Chinese</h2>
-
-        <div class="menu-item"><span>Half Plate</span><span>₹50</span></div>
-        <div class="menu-item"><span>Full Plate</span><span>₹110</span></div>
-
-    </div>
-
-    <div class="menu-box">
-
-        <h2>🥤 Beverages</h2>
-
-        <div class="menu-item"><span>Soft Drink</span><span>₹35</span></div>
-        <div class="menu-item"><span>Strawberry Shake</span><span>₹75</span></div>
-        <div class="menu-item"><span>Chocolate Shake</span><span>₹75</span></div>
-        <div class="menu-item"><span>Blueberry Shake</span><span>₹75</span></div>
-        <div class="menu-item"><span>Lemonade</span><span>₹35</span></div>
-
-    </div>
-
-    <div class="menu-box">
-
-        <h2>🎁 Combo Offers</h2>
-
-        <div class="menu-item"><span>Veg Momos + Soft Drink</span><span>₹99</span></div>
-        <div class="menu-item"><span>Fried Momos + Soft Drink</span><span>₹109</span></div>
-        <div class="menu-item"><span>Tandoori Momos + Soft Drink</span><span>₹99</span></div>
-        <div class="menu-item"><span>Jhol Momos + Soft Drink</span><span>₹109</span></div>
-
-    </div>
-
-</section>
-
-<section class="cta reveal">
-
-    <h2>Hungry Yet?</h2>
-
-    <p>
-        Freshly handcrafted momos, delicious Chinese dishes,
-        refreshing beverages and unbeatable taste are waiting for you.
-    </p>
-
-    <div class="cta-buttons">
-
-        <button onclick="document.getElementById('menu').scrollIntoView({behavior:'smooth'})">
-            View Menu
+<ul>
+    <li><a href="#home">Home</a></li>
+    <li><a href="#menu">Menu</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li>
+        <button type="button" class="cart-btn" onclick="openCart()">
+            <span class="cart-icon">🛒</span>
+            <span class="cart-text">Cart</span>
+            <span id="cart-count">0</span>
         </button>
-
-        <a href="https://maps.google.com" target="_blank">
-            <button class="secondary-btn">
-                Get Directions
-            </button>
-        </a>
-
-    </div>
-
-</section>
-
-<section id="contact" class="contact reveal">
-
-    <div class="contact-left">
-
-        <h2>Visit The MOMO Café</h2>
-
-        <p>
-            We'd love to serve you fresh and delicious momos.
-            Visit us today or order your favourite dishes.
-        </p>
-
-        <div class="contact-info">
-
-            <h3>📍 Address</h3>
-            <p>Shivaji Park, Jalna, Maharashtra</p>
-
-            <h3>📞 Phone</h3>
-            <p>+91 73789-20887</p>
-
-            <h3>🕒 Opening Hours</h3>
-            <p>11:00 AM – 11:00 PM</p>
-
-        </div>
-
-        <a href="https://maps.google.com" target="_blank">
-            <button>Get Directions</button>
-        </a>
-
-    </div>
-
-    <div class="contact-right">
-
-        <img src="images/location.png" alt="The MOMO Café Location">
-
-    </div>
-
-</section>
-
-<a href="https://wa.me/917378920887" class="whatsapp-float" target="_blank">
-    <img src="images/whatsapp.png" alt="WhatsApp">
-</a>
-
-<footer class="footer">
-
-    <div class="footer-container">
-
-        <div class="footer-logo">
-
-            <img src="images/logo.png" alt="The MOMO Café">
-
-            <h2>THE MOMO Café</h2>
-
-            <p>Freshly Made, Served with Love.</p>
-
-        </div>
-
-        <div class="footer-links">
-
-            <h3>Quick Links</h3>
-
-            <a href="#home">Home</a>
-            <a href="#about">About</a>
-            <a href="#gallery">Gallery</a>
-            <a href="#menu">Menu</a>
-            <a href="#contact">Contact</a>
-
-        </div>
-
-        <div class="footer-contact">
-
-            <h3>Contact</h3>
-
-            <p>📍 Shivaji Park, Jalna</p>
-            <p>📞 +91 7378920887 </p>
-            <p>✉️ themomocafe@email.com</p>
-
-        </div>
-
-        <div class="footer-social">
-
-            <h3>Follow Us</h3>
-
-            <a href="#">📸 Instagram</a>
-            <a href="#">📘 Facebook</a>
-            <a href="#">💬 WhatsApp</a>
-
-        </div>
-
-    </div>
-
-    <hr>
-
-    <p class="copyright">
-        © 2026 THE MOMO Café. All Rights Reserved.
+    </li>
+    <li>
+        <a href="admin/login.html">Admin</a>
+    </li>
+</ul>
+</nav>
+<!-- =========================================================
+     HERO
+========================================================= -->
+<section id="home" class="hero">
+<div class="hero-text">
+    <h1>
+        Freshly Made,<br>
+        Served with Love
+    </h1>
+    <p>
+        Experience delicious veg & non-veg momos,
+        freshly prepared every day in Jalna.
     </p>
+    <a href="#menu" class="hero-btn">
+        View Menu
+    </a>
+</div>
+<div class="hero-image">
+    <img
+        src="images/paint.png"
+        class="paint"
+        alt=""
+    >
+    <img
+        src="images/hero.png"
+        class="momos"
+        alt="Steamed Momos"
+    >
+</div>
+</section>
+<!-- =========================================================
+     FEATURES
+========================================================= -->
+<section class="features reveal">
+<div class="reveal">
+    <div class="icon">🥟</div>
+    <h3>Fresh Every Day</h3>
+    <p>
+        Freshly handmade momos prepared daily using
+        quality ingredients.
+    </p>
+</div>
+<div class="reveal">
+    <div class="icon">⭐</div>
+    <h3>Premium Taste</h3>
+    <p>
+        Authentic recipes with rich flavours that keep
+        customers coming back.
+    </p>
+</div>
+<div class="reveal">
+    <div class="icon">🚚</div>
+    <h3>Quick Service</h3>
+    <p>
+        Fast dine-in and takeaway service so you enjoy
+        your food without waiting.
+    </p>
+</div>
+</section>
+<!-- =========================================================
+     ABOUT
+========================================================= -->
+<section id="about" class="about reveal">
+<div class="about-image">
+    <img
+        src="images/about.png"
+        alt="The MOMO Café"
+    >
+</div>
+<div class="about-text">
+    <h2>About The MOMO Café</h2>
+    <p>
+        At <strong>The MOMO Café</strong>, we believe great
+        food begins with fresh ingredients and authentic
+        flavours. Every momo is handcrafted daily and
+        served hot with our signature chutneys.
+    </p>
+    <p>
+        Whether you're dining with friends, grabbing a
+        quick takeaway, or enjoying our refreshing
+        beverages, we strive to make every visit memorable.
+    </p>
+    <button type="button">
+        Visit Us
+    </button>
+</div>
+</section>
+<!-- =========================================================
+     GALLERY
+========================================================= -->
+<section id="gallery" class="gallery reveal">
+<h2>Gallery</h2>
+<p>
+    Take a glimpse of our delicious food and café ambience.
+</p>
+<div class="gallery-grid">
+    <img src="images/gallery1.png" alt="Steamed Momos">
+    <img src="images/gallery2.png" alt="Fried Momos">
+    <img src="images/gallery3.png" alt="Tandoori Momos">
+    <img src="images/gallery4.png" alt="Gravy Momos">
+    <img src="images/gallery5.png" alt="Jhol Momos">
+    <img src="images/gallery6.png" alt="Cafe Interior">
+</div>
+</section>
+<!-- =========================================================
+     TESTIMONIALS
+========================================================= -->
+<section class="testimonials reveal">
+<h2>What Our Customers Say</h2>
+<p>
+    Loved by food lovers across Jalna.
+</p>
+<div class="testimonial-grid">
+    <div class="testimonial-card">
+        <div class="stars">⭐⭐⭐⭐⭐</div>
+        <p>
+            "The steamed momos are incredibly fresh.
+            Definitely my favourite place in Jalna!"
+        </p>
+        <h4>— Rahul S.</h4>
+    </div>
+    <div class="testimonial-card">
+        <div class="stars">⭐⭐⭐⭐⭐</div>
+        <p>
+            "Amazing tandoori momos and quick service.
+            Highly recommended."
+        </p>
+        <h4>— Priya M.</h4>
+    </div>
+    <div class="testimonial-card">
+        <div class="stars">⭐⭐⭐⭐⭐</div>
+        <p>
+            "Great taste, affordable prices and a clean
+            café. Will visit again!"
+        </p>
+        <h4>— Aman K.</h4>
+    </div>
+</div>
+</section>
+<!-- =========================================================
+     BEST SELLERS
+========================================================= -->
+<section class="best-sellers reveal">
+<h2>Our Best Sellers</h2>
+<div class="cards">
+    <div class="card">
+        <img
+            src="images/steamed.png"
+            alt="Steamed Momos"
+        >
+        <div class="card-content">
+            <span class="tag">
+                Veg & Non-Veg
+            </span>
+            <h3>Steamed Momos</h3>
+            <p>
+                Soft, juicy and freshly handcrafted every day.
+            </p>
+            <div class="price-row">
+                <span class="price">
+                    ₹99 Onwards
+                </span>
+                <button
+                    type="button"
+                    class="order-btn"
+                    onclick="addToCart('Steamed Momos', 99)"
+                >
+                    Add to Cart
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <img
+            src="images/fried.png"
+            alt="Fried Momos"
+        >
+        <div class="card-content">
+            <span class="tag">
+                Veg & Non-Veg
+            </span>
+            <h3>Fried Momos</h3>
+            <p>
+                Golden crispy outside with a flavourful filling.
+            </p>
+            <div class="price-row">
+                <span class="price">
+                    ₹119 Onwards
+                </span>
+                <button
+                    type="button"
+                    class="order-btn"
+                    onclick="addToCart('Fried Momos', 119)"
+                >
+                    Add to Cart
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <img
+            src="images/tandoori.png"
+            alt="Tandoori Momos"
+        >
+        <div class="card-content">
+            <span class="tag">
+                Veg & Non-Veg
+            </span>
+            <h3>Tandoori Momos</h3>
+            <p>
+                Smoky, spicy and perfectly grilled.
+            </p>
+            <div class="price-row">
+                <span class="price">
+                    ₹149 Onwards
+                </span>
+                <button
+                    type="button"
+                    class="order-btn"
+                    onclick="addToCart('Tandoori Momos', 149)"
+                >
+                    Add to Cart
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+</section>
+<!-- =========================================================
+     MENU CATEGORIES
+========================================================= -->
+<section class="menu-categories reveal">
+<h2>Explore Our Menu</h2>
+<p>
+    Discover our delicious range of freshly prepared dishes.
+</p>
+<div class="category-grid">
+    <div class="category-card">
+        <span>🥟</span>
+        <h3>Steamed Momos</h3>
+    </div>
+    <div class="category-card">
+        <span>🔥</span>
+        <h3>Fried Momos</h3>
+    </div>
+    <div class="category-card">
+        <span>🌶️</span>
+        <h3>Tandoori Momos</h3>
+    </div>
+    <div class="category-card">
+        <span>🍛</span>
+        <h3>Gravy Momos</h3>
+    </div>
+    <div class="category-card">
+        <span>🍲</span>
+        <h3>Jhol Momos</h3>
+    </div>
+    <div class="category-card">
+        <span>🍜</span>
+        <h3>Chinese</h3>
+    </div>
+    <div class="category-card">
+        <span>🥤</span>
+        <h3>Beverages</h3>
+    </div>
+    <div class="category-card">
+        <span>🎁</span>
+        <h3>Combos</h3>
+    </div>
+</div>
+</section>
+<!-- =========================================================
+     MENU HEADER
+========================================================= -->
+<section id="menu" class="menu-header reveal">
+<h2>Our Complete Menu</h2>
+<p>
+    From steamed favourites to spicy tandoori delights,
+    discover every flavour crafted fresh at The Momo Café.
+</p>
+</section>
+<!-- =========================================================
+     COMPLETE MENU
+========================================================= -->
+<section class="full-menu">
+<!-- STEAMED MOMOS -->
+<div class="menu-category">
+    <h2>🥟 Steamed Momos</h2>
+    <div class="menu-cards">
+        <div class="food-card">
+            <div class="food-icon">🥬</div>
+            <h3>Veg Momos</h3>
+            <p>Fresh vegetable stuffing wrapped in soft handmade dough.</p>
+            <h4>₹79</h4>
+            <button
+                type="button"
+                onclick="addToCart('Veg Momos', 79)"
+            >
+                🛒 Add to Cart
+            </button>
+        </div>
+        <div class="food-card">
+            <div class="food-icon">🧀</div>
+            <h3>Paneer Momos</h3>
+            <p>Soft paneer filling with herbs and mild spices.</p>
+            <h4>₹89</h4>
+            <button
+                type="button"
+                onclick="addToCart('Paneer Momos', 89)"
+            >
+                🛒 Add to Cart
+            </button>
+        </div>
+        <div class="food-card">
+            <div class="food-icon">🍗</div>
+            <h3>Chicken Momos</h3>
+            <p>Juicy chicken filling with authentic Himalayan seasoning.</p>
+            <h4>₹99</h4>
+            <button
+                type="button"
+                onclick="addToCart('Chicken Momos', 99)"
+            >
+                🛒 Add to Cart
+            </button>
+        </div>
+    </div>
+</div>
+<!-- FRIED MOMOS -->
+<div class="menu-category">
+    <h2>🔥 Fried Momos</h2>
+    <div class="menu-cards">
+        <div class="food-card">
+            <div class="food-icon">🥬</div>
+            <h3>Veg Fried Momos</h3>
+            <p>Crispy golden-fried momos with flavorful vegetable stuffing.</p>
+            <h4>₹89</h4>
+            <button
+                type="button"
+                onclick="addToCart('Veg Fried Momos', 89)"
+            >
+                🛒 Add to Cart
+            </button>
+        </div>
+        <div class="food-card">
+            <div class="food-icon">🧀</div>
+            <h3>Paneer Fried Momos</h3>
+            <p>Crispy fried momos filled with soft paneer and spices.</p>
+            <h4>₹99</h4>
+            <button
+                type="button"
+                onclick="addToCart('Paneer Fried Momos', 99)"
+            >
+                🛒 Add to Cart
+            </button>
+        </div>
+        <div class="food-card">
+            <div class="food-icon">🍗</div>
+            <h3>Chicken Fried Momos</h3>
+            <p>Crunchy fried momos stuffed with juicy seasoned chicken.</p>
+            <h4>₹119</h4>
+            <button
+                type="button"
+                onclick="addToCart('Chicken Fried Momos', 119)"
+            >
+                🛒 Add to Cart
+            </button>
+        </div>
+    </div>
+</div>
+<!-- TANDOORI MOMOS -->
+<div class="menu-category">
+    <h2>🔥 Tandoori Momos</h2>
+    <div class="menu-cards">
+        <div class="menu-cards">
+            <div class="food-card">
+                <div class="food-icon">🥬</div>
+                <h3>Veg Tandoori Momos</h3>
+                <p>Smoky tandoori momos coated with delicious spices.</p>
+                <h4>₹79</h4>
+                <button
+                    type="button"
+                    onclick="addToCart('Veg Tandoori Momos', 79)"
+                >
+                    🛒 Add to Cart
+                </button>
+            </div>
+            <div class="food-card">
+                <div class="food-icon">🍗</div>
+                <h3>Non-Veg Tandoori Momos</h3>
+                <p>Smoky and spicy tandoori momos with juicy chicken filling.</p>
+                <h4>₹119</h4>
+                <button
+                    type="button"
+                    onclick="addToCart('Non-Veg Tandoori Momos', 119)"
+                >
+                    🛒 Add to Cart
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- GRAVY MOMOS -->
+<div class="menu-category">
+    <h2>🍛 Gravy Momos</h2>
+    <div class="menu-cards">
+        <div class="food-card">
+            <div class="food-icon">🥬</div>
+            <h3>Veg Gravy Momos</h3>
+            <p>Soft momos served in rich and flavorful gravy.</p>
+            <h4>₹89</h4>
+            <button
+                type="button"
+                onclick="addToCart('Veg Gravy Momos', 89)"
+            >
+                🛒 Add to Cart
+            </button>
+        </div>
+        <div class="food-card">
+            <div class="food-icon">🍗</div>
+            <h3>Non-Veg Gravy Momos</h3>
+            <p>Juicy chicken momos served in delicious spicy gravy.</p>
+            <h4>₹119</h4>
+            <button
+                type="button"
+                onclick="addToCart('Non-Veg Gravy Momos', 119)"
+            >
+                🛒 Add to Cart
+            </button>
+        </div>
+    </div>
+</div>
+<!-- JHOL MOMOS -->
+<div class="menu-category">
+    <h2>🥣 Jhol Momos</h2>
+    <div class="menu-cards">
+        <div class="food-card">
+            <div class="food-icon">🥬</div>
+            <h3>Veg Jhol Momos</h3>
+            <p>Delicious momos served with flavorful Nepali-style jhol.</p>
+            <h4>₹89</h4>
+            <button
+                type="button"
+                onclick="addToCart('Veg Jhol Momos', 89)"
+            >
+                🛒 Add to Cart
+            </button>
+        </div>
+        <div class="food-card">
+            <div class="food-icon">🍗</div>
+            <h3>Non-Veg Jhol Momos</h3>
+            <p>Chicken momos served in a rich, spicy and tangy jhol.</p>
+            <h4>₹129</h4>
+            <button
+                type="button"
+                onclick="addToCart('Non-Veg Jhol Momos', 129)"
+            >
+                🛒 Add to Cart
+            </button>
+        </div>
+    </div>
+</div>
+<!-- CHINESE -->
+<div class="menu-category">
+    <h2>🍜 Chinese</h2>
+    <div class="menu-cards">
+        <div class="food-card">
+            <div class="food-icon">🍜</div>
+            <h3>Chinese Half</h3>
+            <p>A delicious serving of our Chinese specialities.</p>
+            <h4>₹50</h4>
+            <button
+                type="button"
+                onclick="addToCart('Chinese Half', 50)"
+            >
+                🛒 Add to Cart
+            </button>
+        </div>
+        <div class="food-card">
+            <div class="food-icon">🍜</div>
+            <h3>Chinese Full</h3>
+            <p>A generous full serving of our Chinese specialities.</p>
+            <h4>₹110</h4>
+            <button
+                type="button"
+                onclick="addToCart('Chinese Full', 110)"
+            >
+                🛒 Add to Cart
+            </button>
+        </div>
+    </div>
+</div>
+<!-- BEVERAGES -->
+<div class="menu-category">
+    <h2>🥤 Beverages</h2>
+    <div class="menu-cards">
+        <div class="food-card">
+            <div class="food-icon">🥤</div>
+            <h3>Soft Drink</h3>
+            <p>Refreshing chilled soft drink.</p>
+            <h4>₹35</h4>
+            <button
+                type="button"
+                onclick="addToCart('Soft Drink', 35)"
+            >
+                🛒 Add to Cart
+            </button>
+        </div>
+        <div class="food-card">
+            <div class="food-icon">🍓</div>
+            <h3>Strawberry Shake</h3>
+            <p>Creamy and refreshing strawberry shake.</p>
+            <h4>₹75</h4>
+            <button
+                type="button"
+                onclick="addToCart('Strawberry Shake', 75)"
+            >
+                🛒 Add to Cart
+            </button>
+        </div>
+        <div class="food-card">
+            <div class="food-icon">🍫</div>
+            <h3>Chocolate Shake</h3>
+            <p>Rich and creamy chocolate shake.</p>
+            <h4>₹75</h4>
+            <button
+                type="button"
+                onclick="addToCart('Chocolate Shake', 75)"
+            >
+                🛒 Add to Cart
+            </button>
+        </div>
+        <div class="food-card">
+            <div class="food-icon">🫐</div>
+            <h3>Blueberry Shake</h3>
+            <p>Sweet and creamy blueberry shake.</p>
+            <h4>₹75</h4>
+            <button
+                type="button"
+                onclick="addToCart('Blueberry Shake', 75)"
+            >
+                🛒 Add to Cart
+            </button>
+        </div>
+        <div class="food-card">
+            <div class="food-icon">🍋</div>
+            <h3>Lemonade</h3>
+            <p>Fresh and zesty homemade lemonade.</p>
+            <h4>₹35</h4>
+            <button
+                type="button"
+                onclick="addToCart('Lemonade', 35)"
+            >
+                🛒 Add to Cart
+            </button>
+        </div>
+    </div>
+</div>
+<!-- COMBOS -->
+<div class="menu-category">
+    <h2>🎁 Combos</h2>
+    <div class="menu-cards">
+        <div class="food-card">
+            <div class="food-icon">🥟</div>
+            <h3>Veg Momos Combo</h3>
+            <p>Veg momos paired with a refreshing soft drink.</p>
+            <h4>₹102</h4>
+            <button
+                type="button"
+                onclick="addToCart('Veg Momos Combo', 102)"
+            >
+                🛒 Add to Cart
+            </button>
+        </div>
+        <div class="food-card">
+            <div class="food-icon">🔥</div>
+            <h3>Fried Momos Combo</h3>
+            <p>Fried momos paired with a refreshing soft drink.</p>
+            <h4>₹112</h4>
+            <button
+                type="button"
+                onclick="addToCart('Fried Momos Combo', 112)"
+            >
+                🛒 Add to Cart
+            </button>
+        </div>
+        <div class="food-card">
+            <div class="food-icon">🔥</div>
+            <h3>Tandoori Momos Combo</h3>
+            <p>Tandoori momos paired with a refreshing soft drink.</p>
+            <h4>₹103</h4>
+            <button
+                type="button"
+                onclick="addToCart('Tandoori Momos Combo', 103)"
+            >
+                🛒 Add to Cart
+            </button>
+        </div>
+        <div class="food-card">
+            <div class="food-icon">🥣</div>
+            <h3>Jhol Momos Combo</h3>
+            <p>Jhol momos paired with a refreshing soft drink.</p>
+            <h4>₹112</h4>
+            <button
+                type="button"
+                onclick="addToCart('Jhol Momos Combo', 112)"
+            >
+                🛒 Add to Cart
+            </button>
+        </div>
+    </div>
+</div>
+</section>
+<!-- =========================================================
+     CTA
+========================================================= -->
+<section class="cta reveal">
+<h2>Hungry Yet?</h2>
+<p>
+    Freshly handcrafted momos, delicious Chinese dishes,
+    refreshing beverages and unbeatable taste are waiting
+    for you.
+</p>
+<div class="cta-buttons">
+    <button
+        type="button"
+        onclick="document.getElementById('menu').scrollIntoView({behavior:'smooth'})"
+    >
+        View Menu
+    </button>
+    <a
+        href="https://maps.google.com"
+        target="_blank"
+        rel="noopener"
+    >
+        <button
+            type="button"
+            class="secondary-btn"
+        >
+            Get Directions
+        </button>
+    </a>
+</div>
+</section>
+<!-- =========================================================
+     CONTACT
+========================================================= -->
+<section id="contact" class="contact reveal">
+<div class="contact-left">
+    <h2>Visit The MOMO Café</h2>
+    <p>
+        We'd love to serve you fresh and delicious momos.
+        Visit us today or order your favourite dishes.
+    </p>
+    <div class="contact-info">
+        <h3>📍 Address</h3>
+        <p>Shivaji Park, Jalna, Maharashtra</p>
+        <h3>📞 Phone</h3>
+        <p>+91 73789-20887</p>
+        <h3>🕒 Opening Hours</h3>
+        <p>11:00 AM – 11:00 PM</p>
+    </div>
+    <a
+        href="https://maps.google.com"
+        target="_blank"
+        rel="noopener"
+    >
+        <button type="button">
+            Get Directions
+        </button>
+    </a>
+</div>
+<div class="contact-right">
+    <img
+        src="images/location.png"
+        alt="The MOMO Café Location"
+    >
+</div>
+</section>
+<!-- =========================================================
+     WHATSAPP
+========================================================= -->
 
+<a
+href=“https://wa.me/917378920887”
+class=“whatsapp-float”
+target=”_blank”
+rel=“noopener”
+aria-label=“Chat with The MOMO Café on WhatsApp”
+
+<img
+    src="images/whatsapp.png"
+    alt="WhatsApp"
+>
+</a>
+<!-- =========================================================
+     FOOTER
+========================================================= -->
+<footer class="footer">
+<div class="footer-container">
+    <div class="footer-logo">
+        <img
+            src="images/logo.png"
+            alt="The MOMO Café"
+        >
+        <h2>THE MOMO Café</h2>
+        <p>
+            Freshly Made, Served with Love.
+        </p>
+    </div>
+    <div class="footer-links">
+        <h3>Quick Links</h3>
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#menu">Menu</a>
+        <a href="#contact">Contact</a>
+    </div>
+    <div class="footer-contact">
+        <h3>Contact</h3>
+        <p>📍 Shivaji Park, Jalna</p>
+        <p>📞 +91 7378920887</p>
+        <p>✉️ themomocafe@email.com</p>
+    </div>
+    <div class="footer-social">
+        <h3>Follow Us</h3>
+        <a href="#">📸 Instagram</a>
+        <a href="#">📘 Facebook</a>
+        <a href="#">💬 WhatsApp</a>
+    </div>
+</div>
+<hr>
+<p class="copyright">
+    ©️ 2026 THE MOMO Café. All Rights Reserved.
+</p>
 </footer>
-
+<!-- =========================================================
+     CART MODAL
+========================================================= -->
+<div
+    id="cart-modal"
+    class="cart-overlay"
+    aria-hidden="true"
+>
+<div
+    class="cart-modal"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="cart-title"
+>
+    <!-- CART HEADER -->
+    <div class="cart-header">
+        <div>
+            <h2 id="cart-title">
+                Your Cart
+            </h2>
+            <p id="cart-items-count">
+                0 items
+            </p>
+        </div>
+        <button
+            type="button"
+            class="cart-close"
+            onclick="closeCart()"
+            aria-label="Close cart"
+        >
+            ×
+        </button>
+    </div>
+    <!-- CART ITEMS -->
+    <div
+        id="cart-items"
+        class="cart-items"
+    >
+        <!-- JavaScript inserts cart items here -->
+    </div>
+    <!-- CART SUMMARY -->
+    <div class="cart-summary">
+        <div class="summary-row">
+            <span>Subtotal</span>
+            <strong id="cart-subtotal">
+                ₹0
+            </strong>
+        </div>
+        <div class="summary-row">
+            <span>Delivery</span>
+            <strong id="cart-delivery">
+                ₹20
+            </strong>
+        </div>
+        <div class="summary-divider"></div>
+        <div class="summary-total">
+            <span>Total</span>
+            <strong id="cart-total">
+                ₹0
+            </strong>
+        </div>
+    </div>
+    <!-- CART ACTIONS -->
+    <div class="cart-actions">
+        <button
+            type="button"
+            class="continue-btn"
+            onclick="closeCart()"
+        >
+            ← Continue Shopping
+        </button>
+        <button
+            type="button"
+            class="checkout-btn"
+            onclick="checkout()"
+        >
+            Checkout
+            <span>→</span>
+        </button>
+    </div>
+</div>
+</div>
+<!-- =========================================================
+     CHECKOUT POPUP
+========================================================= -->
+<div
+    id="checkoutPopup"
+    class="popup"
+    aria-hidden="true"
+>
+<div
+    class="popup-content checkout-box"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="checkout-title"
+>
+    <div class="checkout-header">
+        <h2 id="checkout-title">
+            Checkout
+        </h2>
+        <button
+            type="button"
+            class="checkout-close"
+            onclick="closeCheckout()"
+            aria-label="Close checkout"
+        >
+            ×
+        </button>
+    </div>
+    <!-- CUSTOMER DETAILS -->
+    <h3>Customer Details</h3>
+    <input
+        type="text"
+        id="checkoutName"
+        placeholder="Full Name"
+        autocomplete="name"
+    >
+    <input
+        type="tel"
+        id="checkoutPhone"
+        placeholder="10-digit Phone Number"
+        maxlength="10"
+        inputmode="numeric"
+        autocomplete="tel"
+    >
+    <!-- DELIVERY LOCATION -->
+    <h3>Delivery Location</h3>
+    <button
+        type="button"
+        class="location-btn"
+        onclick="detectLocation()"
+    >
+        📍 Use My Current Location
+    </button>
+    <p
+        id="locationStatus"
+        class="location-status"
+    ></p>
+    <div class="address-divider">
+        <span>OR ENTER ADDRESS MANUALLY</span>
+    </div>
+    <input
+        type="text"
+        id="checkoutHouse"
+        placeholder="House / Flat / Building"
+        autocomplete="street-address"
+    >
+    <input
+        type="text"
+        id="checkoutArea"
+        placeholder="Street / Area"
+    >
+    <input
+        type="text"
+        id="checkoutLandmark"
+        placeholder="Landmark (Optional)"
+    >
+    <input
+        type="text"
+        id="checkoutCity"
+        placeholder="City"
+        autocomplete="address-level2"
+    >
+    <input
+        type="text"
+        id="checkoutPincode"
+        placeholder="PIN Code"
+        maxlength="6"
+        inputmode="numeric"
+        autocomplete="postal-code"
+    >
+    <!-- SPECIAL NOTE -->
+    <textarea
+        id="checkoutNote"
+        placeholder="Special instructions (Optional)"
+    ></textarea>
+    <!-- ORDER SUMMARY -->
+    <h3>Your Order</h3>
+    <div id="checkoutSummary">
+        <!-- JavaScript inserts checkout summary -->
+    </div>
+    <div class="checkout-total">
+        <strong>Total:</strong>
+        <strong>
+            ₹<span id="checkoutTotal">0</span>
+        </strong>
+    </div>
+    <!-- PAYMENT / ORDER -->
+    <button
+        type="button"
+        class="payment-btn"
+        onclick="placeCartOrder()"
+    >
+        Place Order
+    </button>
+    <button
+        type="button"
+        class="back-cart-btn"
+        onclick="closeCheckout()"
+    >
+        Back to Cart
+    </button>
+</div>
+</div>
+<!-- =========================================================
+     SCRIPTS
+========================================================= -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="script.js"></script>
-
 </body>
 </html>

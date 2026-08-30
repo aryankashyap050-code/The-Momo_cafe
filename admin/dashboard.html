@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>THE MOMO Café | Admin Dashboard</title>
+
+<link rel="stylesheet" href="admin.css">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<script src="https://kit.fontawesome.com/6d2ea823d0.js" crossorigin="anonymous"></script>
+
+</head>
+
+
+<body>
+
+<div class="dashboard">
+
+
+<!-- SIDEBAR -->
+
+<aside class="sidebar">
+
+<h2>🍜 THE MOMO Café</h2>
+
+<ul>
+
+<a href="dashboard.html">
+<li class="active">
+<i class="fas fa-chart-line"></i> Dashboard
+</li>
+</a>
+
+<a href="inventory.html">
+<li>
+<i class="fas fa-box"></i> Inventory
+</li>
+</a>
+
+<a href="orders.html">
+<li>
+<i class="fas fa-utensils"></i> Orders
+</li>
+</a>
+
+<a href="menu.html">
+<li>
+<i class="fas fa-book-open"></i> Menu
+</li>
+</a>
+
+<a href="reports.html">
+<li>
+<i class="fas fa-chart-bar"></i> Reports
+</li>
+</a>
+
+<a href="../index.html">
+<li>
+<i class="fas fa-globe"></i> Website
+</li>
+</a>
+
+<a href="login.html">
+<li>
+<i class="fas fa-right-from-bracket"></i> Logout
+</li>
+</a>
+
+</ul>
+
+</aside>
+
+
+<!-- MAIN CONTENT -->
+
+<main class="content">
+
+
+<header>
+
+<h1>Dashboard</h1>
+
+<span>Welcome, Admin 👋</span>
+
+</header>
+
+
+
+<!-- DASHBOARD CARDS -->
+
+<section class="cards">
+
+
+<div class="card">
+
+<h3>Total Revenue</h3>
+
+<h2 id="revenue">
+₹0
+</h2>
+
+</div>
+
+
+<div class="card">
+
+<h3>Total Orders</h3>
+
+<h2 id="totalOrders">
+0
+</h2>
+
+</div>
+
+
+<div class="card">
+
+<h3>Pending Orders</h3>
+
+<h2 id="pendingOrders">
+0
+</h2>
+
+</div>
+
+
+<div class="card">
+
+<h3>Customers</h3>
+
+<h2 id="customers">
+0
+</h2>
+
+</div>
+
+
+</section>
+
+
+
+<!-- RECENT ORDERS -->
+
+<section class="table-section">
+
+<h2>Recent Orders</h2>
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>Order ID</th>
+
+<th>Customer</th>
+
+<th>Item</th>
+
+<th>Status</th>
+
+</tr>
+
+</thead>
+
+
+<tbody id="recentOrders">
+
+</tbody>
+
+</table>
+
+</section>
+
+
+
+<!-- LOW STOCK -->
+
+<section class="table-section">
+
+<h2>Low Stock Alert</h2>
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>Item</th>
+
+<th>Available</th>
+
+<th>Status</th>
+
+</tr>
+
+</thead>
+
+
+<tbody id="lowStockTable">
+
+</tbody>
+
+</table>
+
+</section>
+
+
+</main>
+
+</div>
+
+
+
+<!-- SUPABASE -->
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+
+<script>
+
+
+/* =====================================
+   SUPABASE CONNECTION
+===================================== */
+
+
+const SUPABASE_URL =
+"https://rwervygorcsmztbwfeqq.supabase.co";
+
+
+const SUPABASE_KEY =
+"sb_publishable_cRA3wSzbzBnH6bSOuu1xLw_rr0Bal6h";
+
+
+const supabaseClient =
+window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+);
+
+
+
+/* =====================================
+   ELEMENTS
+===================================== */
+
+
+const revenueElement =
+document.getElementById("revenue");
+
+
+const totalOrdersElement =
+document.getElementById("totalOrders");
+
+
+const pendingOrdersElement =
+document.getElementById("pendingOrders");
+
+
+const customersElement =
+document.getElementById("customers");
+
+
+const recentOrdersElement =
+document.getElementById("recentOrders");
+
+
+const lowStockElement =
+document.getElementById("lowStockTable");
+
+
+
+/* =====================================
+   CONVERT ITEMS INTO READABLE TEXT
+===================================== */
+
+
+function getItemText(items) {
+
+    if (!items) {
+        return "Order";
+    }
+
+
+    /* If Items is stored as JSON text */
+
+    if (typeof items === "string") {
+
+        try {
+
+            items = JSON.parse(items);
+
+        }
+
+        catch (error) {
+
+            return items;
+
+        }
+
+    }
+
+
+    /* If Items is an array */
+
+    if (Array.isArray(items)) {
+
+        return items.map(item => {
+
+            /* Example:
+               ["Veg Momos", "Chicken Momos"]
+            */
+
+            if (typeof item === "string") {
+
+                return item;
+
+            }
+
+
+            /* Example:
+               { name: "Veg Momos", quantity: 2 }
+            */
+
+            if (typeof item === "object" && item !== null) {
+
+                const name =
+                    item.name ||
+                    item.item_name ||
+                    item.item ||
+                    item.title ||
+                    item.product_name;
+
+
+                const quantity =
+                    item.quantity ||
+                    item.qty;
+
+
+                if (name && quantity) {
+
+                    return `${name} x${quantity}`;
+
+                }
+
+
+                if (name) {
+
+                    return name;
+
+                }
+
+
+                /* If object has one key,
+                   for example:
+                   { "Veg Momos": 2 }
+                */
+
+                const keys =
+                    Object.keys(item);
+
+                if (keys.length === 1) {
+
+                    const key =
+                        keys[0];
+
+                    return `${key} x${item[key]}`;
+
+                }
+
+
+                return "Item";
+
+            }
+
+
+            return String(item);
+
+        }).join(", ");
+
+    }
+
+
+    /* If Items is a single object */
+
+    if (
+        typeof items === "object" &&
+        items !== null
+    ) {
+
+        const name =
+            items.name ||
+            items.item_name ||
+            items.item ||
+            items.title ||
+            items.product_name;
+
+
+        const quantity =
+            items.quantity ||
+            items.qty;
+
+
+        if (name && quantity) {
+
+            return `${name} x${quantity}`;
+
+        }
+
+
+        if (name) {
+
+            return name;
+
+        }
+
+
+        /* Example:
+           { "Chicken Momos": 2 }
+        */
+
+        const keys =
+            Object.keys(items);
+
+
+        if (keys.length === 1) {
+
+            const key =
+                keys[0];
+
+            return `${key} x${items[key]}`;
+
+        }
+
+
+        /* Last fallback */
+
+        return Object.entries(items)
+            .map(([key, value]) =>
+                `${key}: ${value}`
+            )
+            .join(", ");
+
+    }
+
+
+    return String(items);
+
+}
+
+
+
+/* =====================================
+   LOAD ORDERS
+===================================== */
+
+
+async function loadOrders() {
+
+
+    const { data, error } =
+
+        await supabaseClient
+
+        .from("Orders")
+
+        .select("*")
+
+        .order("created_at", {
+            ascending: false
+        });
+
+
+
+    console.log(
+        "DASHBOARD ORDERS:",
+        data
+    );
+
+
+    console.log(
+        "ORDERS ERROR:",
+        error
+    );
+
+
+
+    if (error) {
+
+        console.error(
+            "Error loading orders:",
+            error
+        );
+
+        return;
+
+    }
+
+
+
+    const orders =
+        data || [];
+
+
+
+    /* =================================
+       TOTAL REVENUE
+    ================================= */
+
+
+    let revenue = 0;
+
+
+    orders.forEach(order => {
+
+        revenue +=
+            Number(order.total_amount) || 0;
+
+    });
+
+
+    revenueElement.innerHTML =
+        "₹" + revenue.toFixed(2);
+
+
+
+    /* =================================
+       TOTAL ORDERS
+    ================================= */
+
+
+    totalOrdersElement.innerHTML =
+        orders.length;
+
+
+
+    /* =================================
+       PENDING ORDERS
+    ================================= */
+
+
+    const pendingOrders =
+
+        orders.filter(order =>
+
+            String(
+                order.status || ""
+            ).toLowerCase() ===
+            "pending"
+
+        ).length;
+
+
+    pendingOrdersElement.innerHTML =
+        pendingOrders;
+
+
+
+    /* =================================
+       UNIQUE CUSTOMERS
+    ================================= */
+
+
+    const customers =
+        new Set();
+
+
+    orders.forEach(order => {
+
+        if (order.phone) {
+
+            customers.add(
+                order.phone
+            );
+
+        }
+
+    });
+
+
+    customersElement.innerHTML =
+        customers.size;
+
+
+
+    /* =================================
+       RECENT ORDERS
+    ================================= */
+
+
+    recentOrdersElement.innerHTML =
+        "";
+
+
+
+    const recent =
+        orders.slice(0, 5);
+
+
+
+    if (recent.length === 0) {
+
+        recentOrdersElement.innerHTML = `
+
+        <tr>
+
+            <td colspan="4">
+                No orders found.
+            </td>
+
+        </tr>
+
+        `;
+
+        return;
+
+    }
+
+
+
+    recent.forEach(order => {
+
+
+        /* Get readable item */
+
+        const itemText =
+            getItemText(order.Items);
+
+
+
+        recentOrdersElement.innerHTML += `
+
+        <tr>
+
+            <td>
+                #${order.id || "—"}
+            </td>
+
+
+            <td>
+                ${order.customer_name || "Customer"}
+            </td>
+
+
+            <td>
+                ${itemText}
+            </td>
+
+
+            <td>
+                ${order.status || "Pending"}
+            </td>
+
+        </tr>
+
+        `;
+
+    });
+
+}
+
+
+
+/* =====================================
+   LOAD INVENTORY
+===================================== */
+
+
+async function loadInventory() {
+
+
+    const { data, error } =
+
+        await supabaseClient
+
+        .from("inventory")
+
+        .select("*")
+
+        .order("item_name", {
+            ascending: true
+        });
+
+
+
+    console.log(
+        "DASHBOARD INVENTORY:",
+        data
+    );
+
+
+    console.log(
+        "INVENTORY ERROR:",
+        error
+    );
+
+
+
+    if (error) {
+
+        console.error(
+            "Error loading inventory:",
+            error
+        );
+
+        return;
+
+    }
+
+
+
+    const inventory =
+        data || [];
+
+
+
+    /* =================================
+       LOW STOCK
+    ================================= */
+
+
+    const lowStock =
+
+        inventory.filter(item =>
+
+            Number(item.quantity) <=
+            Number(item.low_stock)
+
+        );
+
+
+
+    lowStockElement.innerHTML =
+        "";
+
+
+
+    if (lowStock.length === 0) {
+
+        lowStockElement.innerHTML = `
+
+        <tr>
+
+            <td colspan="3">
+                All inventory levels are healthy.
+            </td>
+
+        </tr>
+
+        `;
+
+        return;
+
+    }
+
+
+
+    lowStock.forEach(item => {
+
+
+        lowStockElement.innerHTML += `
+
+        <tr>
+
+            <td>
+                ${item.item_name}
+            </td>
+
+
+            <td>
+                ${item.quantity}
+                ${item.unit || ""}
+            </td>
+
+
+            <td>
+                Low
+            </td>
+
+        </tr>
+
+        `;
+
+    });
+
+}
+
+
+
+/* =====================================
+   INITIAL LOAD
+===================================== */
+
+
+loadOrders();
+
+loadInventory();
+
+
+
+/* =====================================
+   REALTIME ORDERS
+===================================== */
+
+
+supabaseClient
+
+.channel("dashboard-orders")
+
+.on(
+
+    "postgres_changes",
+
+    {
+
+        event: "*",
+
+        schema: "public",
+
+        table: "Orders"
+
+    },
+
+    (payload) => {
+
+        console.log(
+            "ORDER UPDATE:",
+            payload
+        );
+
+        loadOrders();
+
+    }
+
+)
+
+.subscribe();
+
+
+
+/* =====================================
+   REALTIME INVENTORY
+===================================== */
+
+
+supabaseClient
+
+.channel("dashboard-inventory")
+
+.on(
+
+    "postgres_changes",
+
+    {
+
+        event: "*",
+
+        schema: "public",
+
+        table: "inventory"
+
+    },
+
+    (payload) => {
+
+        console.log(
+            "INVENTORY UPDATE:",
+            payload
+        );
+
+        loadInventory();
+
+    }
+
+)
+
+.subscribe();
+
+
+</script>
+
+</body>
+
+</html>

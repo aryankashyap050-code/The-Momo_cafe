@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Orders | THE MOMO Café</title>
+
+<link rel="stylesheet" href="admin.css">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<script src="https://kit.fontawesome.com/6d2ea823d0.js" crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+
+<div class="dashboard">
+
+<aside class="sidebar">
+
+<h2>🍜 THE MOMO Café</h2>
+
+<ul>
+
+<a href="dashboard.html"><li><i class="fas fa-chart-line"></i> Dashboard</li></a>
+
+<a href="inventory.html"><li><i class="fas fa-box"></i> Inventory</li></a>
+
+<a href="orders.html"><li class="active"><i class="fas fa-utensils"></i> Orders</li></a>
+
+<a href="reports.html"><li><i class="fas fa-chart-bar"></i> Reports</li></a>
+
+<a href="../index.html"><li><i class="fas fa-globe"></i> Website</li></a>
+
+<a href="login.html"><li><i class="fas fa-right-from-bracket"></i> Logout</li></a>
+
+</ul>
+
+</aside>
+
+<main class="content">
+
+<header>
+
+<h1>Orders Management</h1>
+
+</header>
+
+<section class="table-section">
+
+<h2>Today's Orders</h2>
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>Order ID</th>
+<th>Customer</th>
+<th>Phone</th>
+<th>Items</th>
+<th>Total</th>
+<th>Status</th>
+
+</tr>
+
+</thead>
+
+<tbody id="ordersTable">
+
+</tbody>
+
+</table>
+
+</section>
+
+</main>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+
+const SUPABASE_URL = "https://rwervygorcsmztbwfeqq.supabase.co";
+
+const SUPABASE_KEY = "sb_publishable_cRA3wSzbzBnH6bSOuu1xLw_rr0Bal6h";
+
+const supabaseClient = window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+);
+
+const table = document.getElementById("ordersTable");
+
+async function loadOrders(){
+
+    const { data, error } = await supabaseClient
+        .from("Orders")
+        .select("*")
+        .order("created_at", { ascending: false });
+
+    console.log("ORDERS DATA:", data);
+    console.log("ORDERS ERROR:", error);
+
+    if(error){
+
+        console.error("Supabase error:", error);
+
+        table.innerHTML = `
+            <tr>
+                <td colspan="6">
+                    Error loading orders: ${error.message}
+                </td>
+            </tr>
+        `;
+
+        return;
+    }
+
+    table.innerHTML = "";
+
+    if(!data || data.length === 0){
+
+        table.innerHTML = `
+            <tr>
+                <td colspan="6">
+                    No orders found.
+                </td>
+            </tr>
+        `;
+
+        return;
+    }
+
+    data.forEach((order) => {
+
+        let itemsText = "";
+
+        if(Array.isArray(order.items)){
+
+            itemsText = order.items
+                .filter(item => item.item)
+                .map(item => `${item.item} × ${item.qty}`)
+                .join(", ");
+
+        }else{
+
+            itemsText = order.items || "";
+
+        }
+
+        table.innerHTML += `
+
+        <tr>
+
+            <td>#${order.id}</td>
+
+            <td>${order.customer_name}</td>
+
+            <td>${order.phone}</td>
+
+            <td>${itemsText}</td>
+
+            <td>₹${order.total_amount}</td>
+
+            <td>
+
+                <select
+                    onchange="changeStatus('${order.id}', this.value)"
+                >
+
+                    <option value="Pending"
+                        ${order.status === "Pending" ? "selected" : ""}>
+                        Pending
+                    </option>
+
+                    <option value="Preparing"
+                        ${order.status === "Preparing" ? "selected" : ""}>
+                        Preparing
+                    </option>
+
+                    <option value="Delivered"
+                        ${order.status === "Delivered" ? "selected" : ""}>
+                        Delivered
+                    </option>
+
+                    <option value="Cancelled"
+                        ${order.status === "Cancelled" ? "selected" : ""}>
+                        Cancelled
+                    </option>
+
+                </select>
+
+            </td>
+
+        </tr>
+
+        `;
+
+    });
+
+}
+
+
+async function changeStatus(orderId, newStatus){
+
+    const { error } = await supabaseClient
+        .from("Orders")
+        .update({
+            status: newStatus
+        })
+        .eq("id", orderId);
+
+    if(error){
+
+        console.error("Status update error:", error);
+
+        alert("Could not update order status.");
+
+        return;
+
+    }
+
+    loadOrders();
+
+}
+
+
+loadOrders();
+
+</script>
+
+</body>
+</html>
